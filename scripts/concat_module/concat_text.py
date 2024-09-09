@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # Ruta de la carpeta principal donde están los archivos CSV
-root_dir = '/Users/vivi/Desktop/Conferencias_amlo_csv/2024/Julio 2024'  # Cambia esta ruta a la ruta principal donde están los CSV
+root_dir = '/Users/vivi/Desktop/project/data/Conferencias_amlo_csv/2024/Julio 2024'  # Cambia esta ruta a la ruta principal donde están los CSV
 
 # Inicializar una lista para almacenar el texto concatenado
 all_texts = []
