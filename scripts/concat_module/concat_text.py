@@ -27,7 +27,7 @@ if all_texts:
     concatenated_text = '\n'.join(all_texts)
 
     # Guardar el texto concatenado en un archivo TXT
-    output_file_path = '/Users/vivi/Desktop/Proyecto_semántica/Archivos_amlo_txt/julio2024.txt'  # Cambia esta ruta a la ruta donde quieres guardar el archivo TXT
+    output_file_path = '/Users/vivi/Desktop/project/data/Archivos_amlo_txt/julio2024.txt'  # Cambia esta ruta a la ruta donde quieres guardar el archivo TXT
     with open(output_file_path, 'w', encoding='utf-8') as file:
         file.write(concatenated_text)
 
