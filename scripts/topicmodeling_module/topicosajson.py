@@ -62,7 +62,7 @@ def procesar_texto_y_guardar_tópicos(ruta_archivo, num_topics=15):
     exportar_lda_a_json(lda_model, num_topics=num_topics, ruta_archivo=ruta_archivo)
 
 # Ejemplo de uso
-procesar_texto_y_guardar_tópicos("./data/Archivos_amlo_txt/febrero2020.txt", num_topics=10)
+procesar_texto_y_guardar_tópicos("./data/Archivos_amlo_txt/enero2019.txt", num_topics=10)
 
 
 
