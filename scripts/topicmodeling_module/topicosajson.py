@@ -31,7 +31,7 @@ def generar_modelo_lda(tokens, num_topics=10, passes=15):
     
     return lda_model
 
-def exportar_lda_a_json(lda_model, num_topics=10, ruta_archivo="lda_topics.json", carpeta_salida="./Tópicos_LDA/"):
+def exportar_lda_a_json(lda_model, num_topics=10, ruta_archivo="lda_topics.json", carpeta_salida="./data/Tópicos_LDA/"):
     # Crear carpeta si no existe
     #if not os.path.exists(carpeta_salida):
       #  os.makedirs(carpeta_salida)
@@ -62,7 +62,7 @@ def procesar_texto_y_guardar_tópicos(ruta_archivo, num_topics=15):
     exportar_lda_a_json(lda_model, num_topics=num_topics, ruta_archivo=ruta_archivo)
 
 # Ejemplo de uso
-procesar_texto_y_guardar_tópicos("./Archivos_amlo_txt/diciembre2018.txt", num_topics=10)
+procesar_texto_y_guardar_tópicos("./data/Archivos_amlo_txt/abril2019.txt", num_topics=10)
 
 
 

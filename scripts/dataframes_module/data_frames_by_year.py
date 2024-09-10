@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # Ruta donde están tus archivos .xlsx
-ruta_archivos = '/Users/vivi/Desktop/Proyecto_semántica/Tópicos y n-gramas/2019'
+ruta_archivos = '/Users/vivi/Desktop/project/data/N-gramas/2019'
 
 # Lista para almacenar los DataFrames de cada archivo
 dataframes = []
