@@ -8,7 +8,7 @@ import gensim
 from gensim import corpora
 
 # Configurar la ruta del directorio de datos de NLTK
-nltk.data.path.append('/Users/vivio/nltk_data')
+nltk.data.path.append('/Users/vivi/nltk_data')
 
 # Descargar los recursos necesarios de NLTK si aún no se han descargado
 nltk.download('wordnet', quiet=True)
