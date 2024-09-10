@@ -1,4 +1,4 @@
-# **Análisis del Discurso de AMLO: Identificación de Léxico Relacionado con la Oposición**
+# **Análisis del discurso de AMLO: Identificación de léxico relacionado con la oposición**
 
 Este proyecto se centra en el análisis del discurso de las conferencias matutinas del presidente de México, Andrés Manuel López Obrador, para identificar y estudiar el uso de términos asociados con "la oposición". A través de técnicas de procesamiento de lenguaje natural (NLP), se han procesado y analizado varios años de conferencias para extraer patrones léxicos, porcentajes de frecuencia y tópicos en torno a términos clave como "oposición", "opositor", y "opositores".
 
