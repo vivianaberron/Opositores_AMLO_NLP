@@ -8,7 +8,7 @@ import gensim
 from gensim import corpora
 
 # Configurar la ruta del directorio de datos de NLTK
-nltk.data.path.append('/Users/tu_usuario/nltk_data')
+nltk.data.path.append('/Users/vivio/nltk_data')
 
 # Descargar los recursos necesarios de NLTK si aún no se han descargado
 nltk.download('wordnet', quiet=True)
@@ -17,7 +17,7 @@ nltk.download('stopwords', quiet=True)
 
 print("Leyendo archivo de texto...")
 # Leer el archivo .txt
-with open("./Archivos_amlo_txt/diciembre2019.txt", "r", encoding="utf-8") as file:
+with open("./data/Archivos_amlo_txt/diciembre2019.txt", "r", encoding="utf-8") as file:
     texto = file.read()
 
 # Cargar el modelo de SpaCy en español
@@ -119,4 +119,4 @@ for idx, topic in lda_model.print_topics(-1):
 
 # Guardar los n-gramas relevantes en un archivo Excel
 df = pd.DataFrame(relevant_ngrams, columns=["N-gramas relevantes"])
-df.to_excel("./Tópicos y n-gramas/diciembre2019.xlsx", index=False)
+df.to_excel("./data/N-gramas/diciembre2019.xlsx", index=False)
