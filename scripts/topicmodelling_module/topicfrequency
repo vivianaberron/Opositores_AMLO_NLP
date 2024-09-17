@@ -1,0 +1,36 @@
+import pandas as pd
+import json
+import matplotlib.pyplot as plt
+
+# Supongamos que tienes una lista con los archivos JSON correspondientes a cada mes/año
+archivos_json = ['./data/Tópicos_LDA/enero2019_lda_topics.json', './data/Tópicos_LDA/febrero2019_lda_topics.json', './data/Tópicos_LDA/marzo2019_lda_topics.json']
+
+# Diccionario para guardar la frecuencia de cada tópico por mes
+frecuencias_temas = {}
+
+for archivo in archivos_json:
+    with open(archivo, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        # Nombre del mes o año desde el archivo
+        mes_año = archivo.replace('_lda_topics.json', '')
+        # Sumar las frecuencias de palabras en cada tópico
+        for topic, palabras in data.items():
+            if topic not in frecuencias_temas:
+                frecuencias_temas[topic] = {}
+            total_frecuencia = sum(palabras.values())  # Suma las frecuencias de las palabras del tópico
+            frecuencias_temas[topic][mes_año] = total_frecuencia
+
+# Convertir el diccionario en un DataFrame para facilitar el análisis
+df_frecuencias = pd.DataFrame(frecuencias_temas)
+
+# Mostrar el DataFrame para verificar que se ha cargado correctamente
+print(df_frecuencias)
+
+# Paso 2: Graficar la evolución de los tópicos a lo largo del tiempo
+
+df_frecuencias.plot(kind='line', figsize=(10, 6), marker='o')
+plt.title("Frecuencia de Tópicos a lo largo del tiempo")
+plt.xlabel("Mes/Año")
+plt.ylabel("Frecuencia Total del Tópico")
+plt.grid(True)
+plt.show()
