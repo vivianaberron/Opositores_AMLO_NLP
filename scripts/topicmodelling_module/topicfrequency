@@ -4,22 +4,23 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Palabras clave a rastrear
-palabras_clave = [""]
+palabras_clave = []
 
 # Lista de archivos JSON de tópicos
 archivos_json = [
-    './data/Tópicos_LDA/enero2019_lda_topics.json',
-    './data/Tópicos_LDA/febrero2019_lda_topics.json',
-    './data/Tópicos_LDA/marzo2019_lda_topics.json',
-    './data/Tópicos_LDA/abril2019_lda_topics.json',
-    './data/Tópicos_LDA/mayo2019_lda_topics.json',
-    './data/Tópicos_LDA/junio2019_lda_topics.json',
-    './data/Tópicos_LDA/julio2019_lda_topics.json',
-    './data/Tópicos_LDA/agosto2019_lda_topics.json',
-    './data/Tópicos_LDA/septiembre2019_lda_topics.json',
-    './data/Tópicos_LDA/octubre2019_lda_topics.json',
-    './data/Tópicos_LDA/noviembre2019_lda_topics.json',
-    './data/Tópicos_LDA/diciembre2019_lda_topics.json'
+    './data/Tópicos_LDA/enero2023_lda_topics.json',
+    './data/Tópicos_LDA/febrero2023_lda_topics.json',
+    './data/Tópicos_LDA/marzo2023_lda_topics.json',
+    './data/Tópicos_LDA/abril2023_lda_topics.json',
+    './data/Tópicos_LDA/mayo2023_lda_topics.json',
+    './data/Tópicos_LDA/junio2023_lda_topics.json',
+    './data/Tópicos_LDA/julio2023_lda_topics.json',
+    './data/Tópicos_LDA/agosto2023_lda_topics.json',
+    './data/Tópicos_LDA/septiembre2023_lda_topics.json',
+    './data/Tópicos_LDA/octubre20231_lda_topics.json',
+     './data/Tópicos_LDA/octubre20232_lda_topics.json',
+    './data/Tópicos_LDA/noviembre2023_lda_topics.json',
+    './data/Tópicos_LDA/diciembre2023_lda_topics.json'
 ]
 
 # Diccionario para almacenar la relevancia de las palabras clave a lo largo del tiempo
