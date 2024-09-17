@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # Ruta donde están tus archivos .xlsx
-ruta_archivos = '/Users/vivi/Desktop/project/data/N-gramas/2019'
+ruta_archivos = '/Users/vivi/Desktop/project/data/N-gramas/2024'
 
 # Lista para almacenar los DataFrames de cada archivo
 dataframes = []
@@ -34,4 +34,4 @@ frecuencias['Porcentaje'] = (frecuencias['Frecuencia'] / total_ngramas) * 100
 print(frecuencias.head())
 
 # Guardar los resultados en un archivo Excel
-frecuencias.to_excel('frecuencias_globales_ngramas_2019.xlsx', index=False)
+#frecuencias.to_excel('frecuencias_globales_ngramas_2019.xlsx', index=False)
