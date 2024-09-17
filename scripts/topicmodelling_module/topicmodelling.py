@@ -1,69 +1,65 @@
-import pandas as pd
+import spacy
+import gensim
+from gensim import corpora
 import json
-import seaborn as sns
-import matplotlib.pyplot as plt
+import os
 
-# Palabras clave a rastrear
-palabras_clave = [""]
+def cargar_y_procesar_texto(ruta_archivo):
+    # Cargar modelo de SpaCy en español
+    nlp = spacy.load("es_core_news_md")
+    
+    # Leer archivo .txt
+    with open(ruta_archivo, "r", encoding="utf-8") as file:
+        texto = file.read()
 
-# Lista de archivos JSON de tópicos
-archivos_json = [
-    './data/Tópicos_LDA/enero2019_lda_topics.json',
-    './data/Tópicos_LDA/febrero2019_lda_topics.json',
-    './data/Tópicos_LDA/marzo2019_lda_topics.json',
-    './data/Tópicos_LDA/abril2019_lda_topics.json',
-    './data/Tópicos_LDA/mayo2019_lda_topics.json',
-    './data/Tópicos_LDA/junio2019_lda_topics.json',
-    './data/Tópicos_LDA/julio2019_lda_topics.json',
-    './data/Tópicos_LDA/agosto2019_lda_topics.json',
-    './data/Tópicos_LDA/septiembre2019_lda_topics.json',
-    './data/Tópicos_LDA/octubre2019_lda_topics.json',
-    './data/Tópicos_LDA/noviembre2019_lda_topics.json',
-    './data/Tópicos_LDA/diciembre2019_lda_topics.json',
-    './data/Tópicos_LDA/enero2020_lda_topics.json'
-]
+    # Eliminar saltos de línea y caracteres extraños
+    texto = texto.replace('\n','').replace('\r', ' ').strip()
+    
+    # Procesar el texto y tokenización/lematización
+    doc = nlp(texto)
+    tokens = [token.lemma_.lower() for token in doc if not token.is_stop and not token.is_punct]
+    
+    return tokens
 
-# Diccionario para almacenar la relevancia de las palabras clave a lo largo del tiempo
-frecuencia_palabras = {palabra: [] for palabra in palabras_clave}
-meses = []
+def generar_modelo_lda(tokens, num_topics=10, passes=15):
+    # Crear diccionario y corpus
+    dictionary = corpora.Dictionary([tokens])
+    corpus = [dictionary.doc2bow(tokens)]
+    
+    # Crear el modelo LDA
+    lda_model = gensim.models.LdaModel(corpus, num_topics=num_topics, id2word=dictionary, passes=passes)
+    
+    return lda_model
 
-for archivo in archivos_json:
-    with open(archivo, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-        # Nombre del mes o año
-        mes_año = archivo.replace('_lda_topics.json', '')
-        meses.append(mes_año)
-        
-        # Iterar sobre las palabras clave
-        for palabra in palabras_clave:
-            relevancia_total = 0
-            # Sumar la relevancia de la palabra clave en todos los tópicos
-            for topic, palabras in data.items():
-                if palabra in palabras:
-                    relevancia_total += palabras[palabra]
-            frecuencia_palabras[palabra].append(relevancia_total)
+def exportar_lda_a_json(lda_model, num_topics=10, ruta_archivo="lda_topics.json", carpeta_salida="./data/Tópicos_LDA/"):
+    # Crear carpeta si no existe
+    #if not os.path.exists(carpeta_salida):
+      #  os.makedirs(carpeta_salida)
+    
+    # Obtener solo el nombre del archivo sin extensión
+    nombre_base = os.path.basename(ruta_archivo).replace('.txt', '')
+    
+    # Definir nombre del archivo de salida con extensión .json dentro de la carpeta
+    nombre_salida = os.path.join(carpeta_salida, f"{nombre_base}_lda_topics.json")
+    
+    # Generar los tópicos en un diccionario
+    lda_topics = {}
+    for idx, topic in lda_model.print_topics(num_topics=num_topics, num_words=10):
+        topic_words = lda_model.show_topic(idx, topn=10)
+        # Convertir los pesos de float32 a float para que sean serializables en JSON
+        lda_topics[f"Tópico {idx}"] = {word: float(weight) for word, weight in topic_words}
+    
+    # Guardar los tópicos en un archivo JSON
+    with open(nombre_salida, 'w', encoding='utf-8') as json_file:
+        json.dump(lda_topics, json_file, ensure_ascii=False, indent=4)
+    
+    print(f"Tópicos LDA guardados en {nombre_salida}.")
 
-# Verificar si los datos se cargaron correctamente
-print("Datos cargados:")
-print(frecuencia_palabras)
+# Función principal para generar los tópicos y guardarlos
+def procesar_texto_y_guardar_tópicos(ruta_archivo, num_topics=15):
+    tokens = cargar_y_procesar_texto(ruta_archivo)
+    lda_model = generar_modelo_lda(tokens, num_topics=num_topics)
+    exportar_lda_a_json(lda_model, num_topics=num_topics, ruta_archivo=ruta_archivo)
 
-# Convertir el diccionario a DataFrame
-df_palabras = pd.DataFrame(frecuencia_palabras, index=meses)
-
-# Verificar el DataFrame
-print("\nDataFrame de frecuencias:")
-print(df_palabras)
-
-# Si el DataFrame no está vacío, crear el mapa de calor
-if not df_palabras.empty:
-    plt.figure(figsize=(10, 6))
-    sns.heatmap(df_palabras, annot=True, cmap="YlGnBu", linewidths=.5)
-    plt.title("Relevancia de palabras clave en tópicos a lo largo del tiempo")
-    plt.xlabel("Palabras clave")
-    plt.ylabel("Mes/Año")
-    plt.show()
-else:
-    print("El DataFrame está vacío. Verifica los archivos JSON o las palabras clave.")
-
-#test2
-
+# Ejemplo de uso
+procesar_texto_y_guardar_tópicos("./data/Archivos_amlo_txt/2024.txt", num_topics=10)
