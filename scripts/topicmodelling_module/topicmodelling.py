@@ -19,7 +19,8 @@ archivos_json = [
     './data/Tópicos_LDA/septiembre2019_lda_topics.json',
     './data/Tópicos_LDA/octubre2019_lda_topics.json',
     './data/Tópicos_LDA/noviembre2019_lda_topics.json',
-    './data/Tópicos_LDA/diciembre2019_lda_topics.json'
+    './data/Tópicos_LDA/diciembre2019_lda_topics.json',
+    './data/Tópicos_LDA/enero2020_lda_topics.json'
 ]
 
 # Diccionario para almacenar la relevancia de las palabras clave a lo largo del tiempo
