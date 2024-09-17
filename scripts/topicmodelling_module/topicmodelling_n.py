@@ -65,4 +65,4 @@ def procesar_texto_y_guardar_tópicos_excel(ruta_archivo, columna_texto, num_top
     exportar_lda_a_json(lda_model, num_topics=num_topics, ruta_archivo=ruta_archivo)
 
 # Ejemplo de uso
-procesar_texto_y_guardar_tópicos_excel("./data/Frecuencias por año/frecuencias_globales_ngramas_2020.xlsx", "N-grama", num_topics=10)
+procesar_texto_y_guardar_tópicos_excel("./data/Frecuencias por año/frecuencias_globales_ngramas_2024.xlsx", "N-grama", num_topics=10)
